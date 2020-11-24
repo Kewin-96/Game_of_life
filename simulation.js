@@ -22,7 +22,7 @@ window.onload=function()
     ctx=canv.getContext("2d");
     ctx.fillStyle="#404040";
     ctx.fillRect(0,0,canv.width,canv.height);
-    ctx.fillStyle="lime";
+    ctx.fillStyle="black";
     for(i = 0; i < canvas_width/cell_dimension; i++)
     {
         for(j = 0; j < canvas_height/cell_dimension; j++)
@@ -74,29 +74,29 @@ function mouseMoveOrDown(evt)
         if(last_mouse_cell_position != null)
         {
             if(evt.buttons === 1)
-                createCells(last_mouse_cell_position,cell);
+                changeCells(last_mouse_cell_position,cell,"white");
             if(evt.buttons === 2)
-                killCells(last_mouse_cell_position,cell);
+                changeCells(last_mouse_cell_position,cell,"black");
         }
         else
         {
             if(evt.buttons === 1)
-                createCell(cell);
+                changeCell(cell,"white");
             if(evt.buttons === 2)
-                killCell(cell);
+                changeCell(cell,"black");
         }
         document.getElementById("test").innerHTML += ", cell_x = " + cell.x + ", cell_y = " + cell.y;
     }
     last_mouse_cell_position = cell;
 }
-function createCells(prev_cell,cell)
+function changeCells(prev_cell,cell,color)
 {
     console.log("createCells();, prev_cell = (" + prev_cell.x + "," + prev_cell.y + "), cell = (" + cell.x + "," + cell.y + ")");
     var cells = [];
     if(cell.x - prev_cell.x == 0 && cell.y - prev_cell.y == 0)  //if no line
     {
         console.log("if1");
-        createCell(cell);
+        changeCell(cell,color);
         return;
     }
     else if(cell.y - prev_cell.y == 0)  //if horizontal line
@@ -187,22 +187,11 @@ function createCells(prev_cell,cell)
         throw "This exception shouldn't happen: no reachable code ... for sure???";
     console.log(cells);
     for(i = 0; i < cells.length; i++)
-        createCell(cells[i]);
+        changeCell(cells[i],color);
 }
-function killCells(prev_cell,cell)
+function changeCell(cell,color)
 {
-
-    ctx.fillStyle="black";
-    ctx.fillRect(cell.x*10, cell.y*10, cell_dimension-cell_margin, cell_dimension-cell_margin);
-}
-function createCell(cell)
-{
-    ctx.fillStyle="white";
-    ctx.fillRect(cell.x*10, cell.y*10, cell_dimension-cell_margin, cell_dimension-cell_margin);
-}
-function killCell(cell)
-{
-    ctx.fillStyle="black";
+    ctx.fillStyle=color;
     ctx.fillRect(cell.x*10, cell.y*10, cell_dimension-cell_margin, cell_dimension-cell_margin);
 }
 function mouseMove(evt)
