@@ -22,7 +22,7 @@ window.onload=function()
     ctx=canv.getContext("2d");
     ctx.fillStyle="#404040";
     ctx.fillRect(0,0,canv.width,canv.height);
-    ctx.fillStyle="black";
+    ctx.fillStyle="lime";
     for(i = 0; i < canvas_width/cell_dimension; i++)
     {
         for(j = 0; j < canvas_height/cell_dimension; j++)
@@ -44,14 +44,6 @@ window.onload=function()
             e.stopPropagation();
         mouseUp(evt);
     }
-
-    /*createCells({x:0,y:0},{x:0,y:4});
-    createCells({x:2,y:0},{x:5,y:0});
-    createCells({x:7,y:0},{x:11,y:4});
-    createCells({x:14,y:4},{x:18,y:0});
-    createCells({x:20,y:0},{x:22,y:4});
-    createCells({x:24,y:0},{x:32,y:3});*/
-
 }
 
 function whichCell(x,y)
