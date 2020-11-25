@@ -7,6 +7,10 @@ const cell_dimension = 10;
 const cell_x_count = canvas_width / cell_dimension;
 const cell_y_count = canvas_height / cell_dimension;
 const cell_margin = 1;
+living_cells = [];
+new_generation = [];
+
+generation = 1;
 
 // window.onload=function() - executes when loading site
 window.onload=function()
@@ -24,13 +28,28 @@ window.onload=function()
     ctx.fillStyle="#404040";
     ctx.fillRect(0,0,canv.width,canv.height);
     ctx.fillStyle="black";
-    for(i = 0; i < canvas_width/cell_dimension; i++)
+    for(i = 0; i < cell_x_count; i++)
     {
-        for(j = 0; j < canvas_height/cell_dimension; j++)
+        for(j = 0; j < cell_x_count; j++)
         {
             ctx.fillRect(i*10,j*10,cell_dimension-cell_margin,cell_dimension-cell_margin);
         }
     }
+
+    //initializing array
+    for(i = 0; i < cell_x_count; i++)
+    {
+        living_cells.push([]);
+        new_generation.push([]);
+        for(j = 0; j < cell_y_count; j++)
+        {
+            living_cells[i].push(false);
+            new_generation[i].push(false);
+        }
+    }
+
+    //DEBUG event
+    document.addEventListener("keydown",keyDown);
 
     //adding event listeners
     canv.addEventListener("mousemove",mouseMove);
@@ -59,7 +78,7 @@ function whichCell(x,y,canBeOnGridcell)
     cell_y = Math.floor(y / cell_dimension);
     if(!(x >= 0 && x < canvas_width && y >= 0 && y < canvas_height))    // if cursor is outside canvas
         return null;
-    return {x : cell_x, y : cell_y};
+    return {x:cell_x, y:cell_y};
 }
 
 // function whichCell(x,y) - when user clicks mouse or moves mouse whet it is pressed
@@ -88,16 +107,22 @@ function mouseMoveOrDown(evt)
         if(last_mouse_cell_position != null)    //if there is previous cell
         {
             if(evt.buttons === 1)
-                drawCells(last_mouse_cell_position,cell,"white");
+            {
+                cells = makeCellsLine(last_mouse_cell_position,cell,"white");
+                createAndDrawCells(cells);
+            }
             if(evt.buttons === 2)
-                drawCells(last_mouse_cell_position,cell,"black");
+            {
+                cells = makeCellsLine(last_mouse_cell_position,cell,"black");
+                killAndDrawCells(cells);
+            }
         }
         else
         {
             if(evt.buttons === 1)
-                drawCell(cell,"white");
+                createAndDrawCells([cell]);
             if(evt.buttons === 2)
-                drawCell(cell,"black");
+                killAndDrawCells([cell]);
         }
         // DEBUG: displaying cell position
         document.getElementById("test").innerHTML += ", cell_x = " + cell.x + ", cell_y = " + cell.y;
@@ -105,14 +130,13 @@ function mouseMoveOrDown(evt)
     last_mouse_cell_position = cell;    //saving previous cell
 }
 
-// function drawCells(prev_cell,cell,color) - drawing cells
-function drawCells(prev_cell,cell,color)
+// function drawCells(prev_cell,cell) - creating line of cells between 2 cells
+function makeCellsLine(prev_cell,cell)
 {
     var cells = [];
     if(cell.x - prev_cell.x == 0 && cell.y - prev_cell.y == 0)  //if there will be no line (just point)
     {
-        drawCell(cell,color);
-        return;
+        return [cell];
     }
     else if(cell.y - prev_cell.y == 0)  //if there will be horizontal line
     {
@@ -194,8 +218,39 @@ function drawCells(prev_cell,cell,color)
     }
     else
         throw "This exception shouldn't happen: no reachable code ... for sure???";
+    return cells;
+}
+
+// function createCells(cells) - creating cells (adding to array)
+function createCells(cells)
+{
+    /*console.log("X1: " + cells);
+    console.log(cells);*/
     for(i = 0; i < cells.length; i++)
-        drawCell(cells[i],color);
+        living_cells[cells[i].x][cells[i].y] = true;
+}
+
+// function killCells(cells) - destroying cells (removing from array)
+function killCells(cells)
+{
+    for(i = 0; i < cells.length; i++)
+        living_cells[cells[i].x][cells[i].y] = false;
+}
+
+// function createAndDrawCells(cells) - creating and drawing cells
+function createAndDrawCells(cells)
+{
+    createCells(cells);
+    for(i = 0; i < cells.length; i++)
+        drawCell(cells[i],"white");
+}
+
+// function killAndDrawCells(cells) - destroying and drawing cells
+function killAndDrawCells(cells)
+{
+    killCells(cells);
+    for(i = 0; i < cells.length; i++)
+        drawCell(cells[i],"black");
 }
 
 // function drawCell(cell,color) - drawing cell
@@ -224,4 +279,87 @@ function mouseUp(evt)
 {
     pushed = false;
     last_mouse_cell_position = null;
+}
+
+function drawingGeneration()
+{
+    //filling canvas with gridcell
+    ctx.fillStyle="black";
+    for(i = 0; i < cell_x_count; i++)
+    {
+        for(j = 0; j < cell_y_count; j++)
+        {
+            ctx.fillRect(i*10,j*10,cell_dimension-cell_margin,cell_dimension-cell_margin);
+        }
+    }
+
+    //drawing cells
+    for(i = 0; i < living_cells.length; i++)
+        for(j = 0; j < living_cells.length; j++)
+            if(living_cells[i][j] == true)
+                drawCell({x:i,y:j},"white");
+}
+
+//DEBUG func
+function keyDown(evt)
+{
+    //filling canvas with gridcell
+    /*ctx.fillStyle="black";
+    for(i = 0; i < cell_x_count; i++)
+    {
+        for(j = 0; j < cell_y_count; j++)
+        {
+            ctx.fillRect(i*10,j*10,cell_dimension-cell_margin,cell_dimension-cell_margin);
+        }
+    }
+
+    for(i = 0; i < living_cells.length; i++)
+        for(j = 0; j < living_cells.length; j++)
+            if(living_cells[i][j] == true)
+                drawCell({x:i,y:j},"lime");
+
+    console.log("poof!");*/
+
+
+    //setting interval -> simulation 10Hz
+    setInterval(simulation,1000/100);
+}
+
+function simulation()
+{
+    living_neighborhood = 0;
+    for(x = 0; x < cell_x_count; x++)
+    {
+        for(y = 0; y < cell_y_count; y++)
+        {
+            living_neighborhood = 0;
+            for(i = x - 1; i <= x + 1; i++)     //calculating living neightbors
+            {
+                if(i >= 0 && i < cell_x_count)
+                    for(j = y - 1; j <= y + 1; j++)
+                    {
+                        if(j >= 0 && j < cell_y_count && !(i == x && j == y))
+                        {
+                            if(living_cells[i][j] == true)
+                                living_neighborhood++;
+                        }
+                    }
+            }
+            if((living_cells[x][y] == false && living_neighborhood == 3 ) || ( living_cells[x][y] == true && (living_neighborhood == 2 || living_neighborhood == 3) ))
+                new_generation[x][y]=true;
+            else
+                new_generation[x][y]=false;
+        }
+    }
+
+    for(i = 0; i < cell_x_count; i++)
+    {
+        for(j = 0; j < cell_y_count; j++)
+        {
+            living_cells[i][j] = new_generation[i][j];
+        }
+    }
+
+    generation++;
+    drawingGeneration();
 }
