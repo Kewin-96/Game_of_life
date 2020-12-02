@@ -7,14 +7,32 @@
 		<meta name = "keywords" content = "game of life, game, life, simulation, simulation of life, html, javascript, css"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<link rel = "stylesheet" href="styles.css" type = "text/css" />
-	</head>
-	<body>
-		<canvas id="gc" width="100" height="100"></canvas>
-		<p id="test"></p>
 		<script src = "JS/updating_cells.js"> </script>
 		<script src = "JS/simulation.js"> </script>
 		<script src = "JS/drawing_tools.js"> </script>
 		<script src = "JS/input_events.js"> </script>
 		<script src = "main.js"> </script>
+	</head>
+	<body>
+		<div id = "div_container">
+			<div id = "div_top">
+				<div id = "div_instruction">
+					Game of life is simulation 
+				</div>
+				<div id = "div_top_body">
+					<div id = "div_parameters">
+						div_parameters
+					</div>
+					<div id = "div_tools">
+						div_tools
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+			<p id="test">x</p>
+			<div id = "div_canvas">
+				<canvas id="canv" width="100" height="100"></canvas>
+			</div>
+		</div>
 	</body>
 </html>

@@ -3,7 +3,6 @@ import * as InputEvents from "./JS/input_events.js";
 import * as Simulation from "./JS/simulation.js";
 import * as UpdatingCells from "./JS/updating_cells.js";*/
 
-const canvas_margin = 8;
 const canvas_width = 800;
 const canvas_height = 800;
 const cell_dimension = 10;
@@ -19,49 +18,49 @@ new_generation = [];        //80x80 arrays of object {x,y} (cell)
 // window.onload=function() - executes when loading site
 window.onload=function()
 {
-    if(cell_x_count != this.parseInt(cell_x_count) || cell_y_count != this.parseInt(cell_y_count))
-        throw 'cell_x_count or cell_y_count is not integer !!!';
+	if(cell_x_count != this.parseInt(cell_x_count) || cell_y_count != this.parseInt(cell_y_count))
+		throw 'cell_x_count or cell_y_count is not integer !!!';
 
-    //setting canvas dimensions
-    canv=document.getElementById("gc");
-    canv.width = canvas_width;
-    canv.height = canvas_height;
+	//setting canvas dimensions
+	canv=document.getElementById("canv");
+	canv.width = canvas_width;
+	canv.height = canvas_height;
 
-    //filling canvas with gridcell
-    ctx=canv.getContext("2d");
-    ctx.fillStyle="#404040";
-    ctx.fillRect(0,0,canv.width,canv.height);
-    ctx.fillStyle="black";
-    for(i = 0; i < cell_x_count; i++)
-        for(j = 0; j < cell_x_count; j++)
-            ctx.fillRect(i*10,j*10,cell_dimension-cell_margin,cell_dimension-cell_margin);
+	//filling canvas with gridcell
+	ctx=canv.getContext("2d");
+	ctx.fillStyle="#404040";
+	ctx.fillRect(0,0,canv.width,canv.height);
+	ctx.fillStyle="black";
+	for(i = 0; i < cell_x_count; i++)
+		for(j = 0; j < cell_x_count; j++)
+			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-cell_margin,cell_dimension-cell_margin);
 
-    //initializing array
-    for(i = 0; i < cell_x_count; i++)
-    {
-        living_cells.push([]);
-        new_generation.push([]);
-        for(j = 0; j < cell_y_count; j++)
-        {
-            living_cells[i].push(false);
-            new_generation[i].push(false);
-        }
-    }
+	//initializing array
+	for(i = 0; i < cell_x_count; i++)
+	{
+		living_cells.push([]);
+		new_generation.push([]);
+		for(j = 0; j < cell_y_count; j++)
+		{
+			living_cells[i].push(false);
+			new_generation[i].push(false);
+		}
+	}
 
-    //DEBUG event
-    document.addEventListener("keydown",keyDown);
+	//DEBUG event
+	document.addEventListener("keydown",keyDown);
 
-    //adding event listeners
-    canv.addEventListener("mousemove",mouseMove);
-    canv.addEventListener("mousedown",mouseDown);
-    canv.addEventListener("mouseup",mouseUp);
-    canv.oncontextmenu  = function(e)
-    {
-        var evt = new Object({keyCode:93});
-        if(e.preventDefault != undefined)
-            e.preventDefault();
-        if(e.stopPropagation != undefined)
-            e.stopPropagation();
-        mouseUp(evt);
-    }
+	//adding event listeners
+	canv.addEventListener("mousemove",mouseMove);
+	canv.addEventListener("mousedown",mouseDown);
+	canv.addEventListener("mouseup",mouseUp);
+	canv.oncontextmenu  = function(e)
+	{
+		var evt = new Object({keyCode:93});
+		if(e.preventDefault != undefined)
+			e.preventDefault();
+		if(e.stopPropagation != undefined)
+			e.stopPropagation();
+		mouseUp(evt);
+	}
 }
