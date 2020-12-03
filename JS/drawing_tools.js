@@ -30,9 +30,6 @@ function pencilErase(evt)
 	else
 		cell = whichCell(x,y,false);
 
-	// DEBUG: displaying position of cursor, pressed mouse button
-	document.getElementById("test").innerHTML = "x = " + x + ", y = " + y + ", button = " + evt.buttons;
-
 	// Drawing cells
 	if(cell == null && last_mouse_cell_position == null)    // if there is no cell and there is no previous cell: do not draw
 	{
@@ -60,8 +57,6 @@ function pencilErase(evt)
 			if(evt.buttons === 2)
 				killAndDrawCells([cell]);
 		}
-		// DEBUG: displaying cell position
-		document.getElementById("test").innerHTML += ", cell_x = " + cell.x + ", cell_y = " + cell.y;
 	}
 	last_mouse_cell_position = cell;    //saving previous cell
 }

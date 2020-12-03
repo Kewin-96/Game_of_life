@@ -11,25 +11,65 @@
 		<script src = "JS/simulation.js"> </script>
 		<script src = "JS/drawing_tools.js"> </script>
 		<script src = "JS/input_events.js"> </script>
+		<script src = "JS/input_interface.js"> </script>
+		<script src = "JS/initialization.js"> </script>
 		<script src = "main.js"> </script>
 	</head>
 	<body>
 		<div id = "div_container">
 			<div id = "div_top">
-				<div id = "div_instruction">
-					Game of life is simulation 
+				<div id = "top_head">
+					<div id = "div_about">
+						"The
+						<a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank" title="Wikipedia: game of life">Game of Life</a>
+						, also known simply as Life, is a cellular automaton devised by the British
+						mathematician John Horton Conway in 1970. It is a zero-player game, meaning
+						that its evolution is determined by its initial state, requiring no further
+						input. One interacts with the Game of Life by creating an initial configuration
+						and observing how it evolves. It is Turingcomplete and can simulate a universal
+						constructor or any other Turing machine." </br>
+						<div style = "text-align: right;"><a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank" title="Wikipedia: game of life">Wikipedia</a></div>
+						<p>The game takes place on an infinite board divided into square cells. Cells can be "alive" or "dead".("1" or "0" - white or black).
+						Succesive generations are succesive moments of time. There are 2 rules of calculating next generation: </br>
+						- "dead" cell which has exacly 3 "alived" neighbors, becomes "alived".</br>
+						- "alived" cell with 2 or 3 "alived" neighbors stays "alived"; in another case cell dies.</p>
+					</div>
+					<div id = "div_instruction">
+						To create cell(s) press and hold <u>left mouse button</u> and drag mouse. To kill cell(s) use <u>right mouse button</u>.
+					</div>
 				</div>
 				<div id = "div_top_body">
 					<div id = "div_parameters">
 						div_parameters
 					</div>
 					<div id = "div_tools">
-						div_tools
+						<a href = "javascript:button_undo();" id = "button_undo">
+							<img src="img/icon_undo.png" title="undo">
+						</a>
+						<a href = "javascript:button_redo();" id = "button_redo">
+							<img src="img/icon_redo.png" title="redo">
+						</a>
+						<a href = "javascript:button_start();" id = "button_start_stop">
+							<img src="img/icon_start.png" title="start" id = "image_start_stop">
+						</a>
+						<a href = "javascript:button_speedDown();" id = "button_image">
+							<img src="img/icon_speedDown.png" title="speed up">
+						</a>
+						<a href = "javascript:button_speedUp();" id = "button_image">
+							<img src="img/icon_speedUp.png" title="speed down">
+						</a>
+						<a href = "javascript:button_backTo1Gen();" id = "button_image">
+							<img src="img/icon_backTo1Gen.png" title="go back to first generation">
+						</a>
+						<a href = "javascript:button_clear();" id = "button_image">
+							<img src="img/icon_clear.png" title="clear board and start from first generation">
+						</a>
+						<p id="p_start_status">Simulation stopped</p>
+						<p id="p_speed">Speed: 99999</p>
 					</div>
 					<div style="clear: both;"></div>
 				</div>
 			</div>
-			<p id="test">x</p>
 			<div id = "div_canvas">
 				<canvas id="canv" width="100" height="100"></canvas>
 			</div>

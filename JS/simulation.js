@@ -23,6 +23,8 @@ function drawingGeneration()
 
 function simulation()
 {
+	if(started == false)
+		return;
 	living_neighborhood = 0;
 	for(x = 0; x < cell_x_count; x++)
 	{

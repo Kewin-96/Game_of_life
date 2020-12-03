@@ -2,43 +2,82 @@ body
 {
 	background-color: rgb(100, 100, 255);
 }
-#div_container
+	#div_container
+	{
+		/*background-color: rgb(30, 255, 0);*/
+		width: min-content;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+		#div_top
+		{
+			width:1000px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+			#div_top_head
+			{
+				padding-top: 0.5%;
+				padding-bottom: 0.5%;
+			}
+				#div_about
+				{
+					background-color: rgb(188, 188, 255);
+					margin-bottom: 0.5%;
+					padding: 0.5%;
+					text-align: justify;
+					text-indent: 50px;
+					padding: 15px;
+				}
+				#div_instruction
+				{
+					background-color: rgb(188, 188, 255);
+					padding: 0.5%;
+					text-align: center;
+					text-indent: 50px;
+					font-weight: bold;
+					font-family: Arial;
+					font-size: 18px;
+					padding: 15px;
+				}
+			#div_top_body
+			{
+				padding-top: 0.5%;
+				padding-bottom: 0.5%;
+			}
+				#div_parameters
+				{
+					background-color: rgb(188, 188, 255);
+					width: 48.75%;
+					float: left;
+					margin-right: 0.5%;
+					padding: 0.5%;
+					height: 100px;
+					padding-top: 20px;
+				}
+				#div_tools
+				{
+					background-color: rgb(188, 188, 255);
+					width: 48.75%;
+					float: left;
+					padding: 0.5%;
+					height: 100px;
+					padding-top: 20px;
+				}
+		#div_canvas
+		{
+			
+		}
+#button_image, #button_start_stop, #button_undo, #button_redo
 {
-	/*background-color: rgb(30, 255, 0);*/
-	width: min-content;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	margin: 5px;
+	text-decoration: none;
 }
-#div_top
+#p_start_status, #p_speed
 {
-	
-}
-#div_instruction
-{
-	background-color: rgb(188, 188, 255);
-}
-#div_top_body
-{
-	padding-top: 0.5%;
-	padding-bottom: 0.5%;
-}
-#div_parameters
-{
-	background-color: rgb(188, 188, 255);
-	width: 48.75%;
-	float: left;
-	margin-right: 0.5%;
-	padding: 0.5%;
-}
-#div_tools
-{
-	background-color: rgb(188, 188, 255);
-	width: 48.75%;
-	float: left;
-	padding: 0.5%;
-}
-#div_canvas
-{
-    
+	margin: 2px;
+	color: rgb(27, 27, 66);
+	font-weight: bold;
+	font-family: Arial;
 }
