@@ -4,11 +4,37 @@
 
 function button_undo()
 {
-    
+    if(buffor_cells_pointer > 0)
+    {
+        buffor_cells_pointer--;
+        living_cells = [];
+        for(i = 0; i < buffor_cells[buffor_cells_pointer].length; i++)
+        {
+            living_cells.push([]);
+            for(j = 0; j < buffor_cells[buffor_cells_pointer][i].length; j++)
+            {
+                living_cells[i].push(buffor_cells[buffor_cells_pointer][i][j]);
+            }
+        }
+        drawingGeneration();
+    }
 }
 function button_redo()
 {
-    
+    if(buffor_cells_pointer < buffor_cells.length - 1)
+    {
+        buffor_cells_pointer++;
+        living_cells = [];
+        for(i = 0; i < buffor_cells[buffor_cells_pointer].length; i++)
+        {
+            living_cells.push([]);
+            for(j = 0; j < buffor_cells[buffor_cells_pointer][i].length; j++)
+            {
+                living_cells[i].push(buffor_cells[buffor_cells_pointer][i][j]);
+            }
+        }
+        drawingGeneration();
+    }
 }
 function button_start()
 {
@@ -21,10 +47,6 @@ function button_start()
 
     //updating information
     document.getElementById("p_start_status").innerHTML = "Simulation started";
-
-    //disabling redo and undo buttons
-    document.getElementById("button_undo").style = "pointer-events: none; opacity: 0.6;";
-    document.getElementById("button_redo").style = "pointer-events: none; opacity: 0.6;";
 }
 function button_stop()
 {
@@ -37,10 +59,6 @@ function button_stop()
 
     //updating information
     document.getElementById("p_start_status").innerHTML = "Simulation stopped";
-
-    //DEBUG, TEMP   - trzeba to dac w inne miejsce !!!
-    document.getElementById("button_undo").style = "pointer-events: all; opacity: 1;";
-    document.getElementById("button_redo").style = "pointer-events: all; opacity: 1;";
 }
 function button_speedDown()
 {
@@ -68,7 +86,21 @@ function button_speedUp()
 function button_backTo1Gen()
 {
     button_stop();
-    //COFNIECIE DO PIERWSZEJ GENERACJI !!!
+    if(generation > 1)
+    {
+        living_cells = [];
+        for(i = 0; i < first_generation.length; i++)
+		{
+			living_cells.push([]);
+			for(j = 0; j < first_generation[i].length; j++)
+			{
+				living_cells[i].push(first_generation[i][j]);
+			}
+        }
+        drawingGeneration();
+        generation = 1;
+        enableDisable(true);
+    }
 }
 
 function button_clear()
@@ -76,4 +108,18 @@ function button_clear()
 	button_backTo1Gen();
     init_canvas();
     init_simulation();
+}
+
+function enableDisable(enable)
+{
+    if(enable == true)
+    {
+        document.getElementById("button_undo").style = "pointer-events: all; opacity: 1;";
+        document.getElementById("button_redo").style = "pointer-events: all; opacity: 1;";
+    }
+    else
+    {
+        document.getElementById("button_undo").style = "pointer-events: none; opacity: 0.6;";
+        document.getElementById("button_redo").style = "pointer-events: none; opacity: 0.6;";
+    }
 }

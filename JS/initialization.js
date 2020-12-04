@@ -20,15 +20,20 @@ function init_simulation()
 	//initializing array
 	living_cells = [];
 	new_generation = [];
+	buffor_cells = [];
+	buffor_cells_pointer = 0;
+	buffor_cells.push([]);
 	for(i = 0; i < cell_x_count; i++)
 	{
 		living_cells.push([]);
 		new_generation.push([]);
+		buffor_cells[0].push([]);
 		for(j = 0; j < cell_y_count; j++)
 		{
 			living_cells[i].push(false);
 			new_generation[i].push(false);
+			buffor_cells[0][i].push(false);
 		}
 	}
-	
+
 }

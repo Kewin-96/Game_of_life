@@ -25,6 +25,19 @@ function simulation()
 {
 	if(started == false)
 		return;
+	if(generation == 1)
+	{
+		enableDisable(false);
+        first_generation = [];
+		for(i = 0; i < living_cells.length; i++)
+		{
+			first_generation.push([]);
+			for(j = 0; j < living_cells[i].length; j++)
+			{
+				first_generation[i].push(living_cells[i][j]);
+			}
+		}
+	}
 	living_neighborhood = 0;
 	for(x = 0; x < cell_x_count; x++)
 	{
