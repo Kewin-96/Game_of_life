@@ -3,7 +3,8 @@
 // ****************************************************
 
 // function drawCells(prev_cell,cell) - creating line of cells between 2 cells
-// prev_cell - previous cell, cell - current cell
+// prev_cell - previous cell
+// cell - current cell
 // returns 1D array of cells {x,y}
 function makeCellsLine(prev_cell,cell)
 {
@@ -96,40 +97,43 @@ function makeCellsLine(prev_cell,cell)
 }
 
 // function createCells(cells) - creating cells (adding to array)
+// cells - 1D array of cells {x,y}
 function createCells(cells)
-	{
-	/*console.log("X1: " + cells);
-	console.log(cells);*/
+{
 	for(i = 0; i < cells.length; i++)
 		living_cells[cells[i].x][cells[i].y] = true;
 }
 
 // function killCells(cells) - destroying cells (removing from array)
+// cells - 1D array of cells {x,y}
 function killCells(cells)
-	{
+{
 	for(i = 0; i < cells.length; i++)
 		living_cells[cells[i].x][cells[i].y] = false;
 }
 
 // function createAndDrawCells(cells) - creating and drawing cells on canvas
+// cells - 1D array of cells {x,y}
 function createAndDrawCells(cells)
-	{
+{
 	createCells(cells);
 	for(i = 0; i < cells.length; i++)
 		drawCell(cells[i],"white");
 }
 
 // function killAndDrawCells(cells) - destroying and drawing cells on canvas
+// cells - 1D array of cells {x,y}
 function killAndDrawCells(cells)
-	{
+{
 	killCells(cells);
 	for(i = 0; i < cells.length; i++)
 		drawCell(cells[i],"black");
 }
 
 // function drawCell(cell,color) - drawing cell
+// cell - cell {x,y}
 function drawCell(cell,color)
-	{
+{
 	ctx.fillStyle=color;
 	ctx.fillRect(cell.x*cell_dimension, cell.y*cell_dimension, cell_dimension-CELL_MARGIN, cell_dimension-CELL_MARGIN);
 }

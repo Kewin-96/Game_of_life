@@ -2,42 +2,41 @@
 // ******************** INPUT EVENTS ******************
 // ****************************************************
 
-// function mouseMove(evt) - moving mouse (event) (on canvas)
+// function mouseMove(evt) - moving mouse (on canvas)
+// evt - event (used to get mouse button)
 function mouseMove(evt)
 {
 	if(pushed == true)
 		pencilErase(evt);
 }
 
-// function mouseDown(evt) - pressing mouse button (event) (on canvas)
+// function mouseDown(evt) - pressing mouse button (on canvas)
+// evt - event (used to get mouse button)
 function mouseDown(evt)
 {
 	pushed = true;
 	pencilErase(evt);
 }
 
-// function mouseDown(evt) - leaving mouse button (event) (on canvas)
-function mouseUp(evt)
+// function mouseDown() - leaving mouse button (on canvas)
+function mouseUp()
 {
 	pushed = false;
 	last_mouse_cell_position = null;
 	
 	//copying set of cells to buffor_cells for "undo", "redo" operations
-	//DEBUG
 	if (buffor_cells_pointer >= buffor_cells.length)
-		throw 'VERY BAD 356835683 !!!';
+		throw 'buffor_cells_pointer < buffor_cells.length';
 	if(buffor_cells_pointer < buffor_cells.length - 1)
 	{
 		var buf = buffor_cells.length - 1 - buffor_cells_pointer;
 		for(i = 0; i < buf; i++)
 		{
 			buffor_cells.pop();
-			console.log("buffor_cells.length = " + buffor_cells.length);
 		}
 	}
-	//DEBUG
 	if (buffor_cells_pointer != buffor_cells.length-1)
-		throw 'VERY BAD 038571823 !!!';
+		throw 'buffor_cells_pointer == buffor_cells.length-1';
 	if(buffor_cells.length == MAX_BUFFOR_CELLS_LENGTH)
 	{
 		buffor_cells.shift();
@@ -55,6 +54,8 @@ function mouseUp(evt)
 	buffor_cells_pointer++;
 }
 
+// function keyDown(evt) - pressing key
+// evt - event (used to get key)
 function keyDown(evt)
 {
 	if(evt.ctrlKey == true)

@@ -2,11 +2,14 @@
 // ****************** INPUT INTERFACE *****************
 // ****************************************************
 
+// function dimensionsFormChanged() - function executes when text will be change in one of 3 textbox on site
 function dimensionsFormChanged()
 {
     document.getElementById("a_w").innerHTML = parseInt(document.getElementById("inputText_x_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
     document.getElementById("a_h").innerHTML = parseInt(document.getElementById("inputText_y_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
 }
+
+// function button_submit() - function takes input parameters, checks if they are correct and applies them
 function button_submit()
 {
     cx = parseInt(document.getElementById("inputText_x_cells").value);
@@ -31,6 +34,8 @@ function button_submit()
         document.getElementById("p_cd").innerHTML = cd;
     }
 }
+
+// function button_undo() - undo operation
 function button_undo()
 {
     if(buffor_cells_pointer > 0)
@@ -45,9 +50,11 @@ function button_undo()
                 living_cells[i].push(buffor_cells[buffor_cells_pointer][i][j]);
             }
         }
-        drawingGeneration();
+        drawGeneration();
     }
 }
+
+// function button_redo() - redo operation
 function button_redo()
 {
     if(buffor_cells_pointer < buffor_cells.length - 1)
@@ -62,11 +69,14 @@ function button_redo()
                 living_cells[i].push(buffor_cells[buffor_cells_pointer][i][j]);
             }
         }
-        drawingGeneration();
+        drawGeneration();
     }
 }
+
+// function button_start() - start simulation
 function button_start()
 {
+    //boolen - is simulation started
     started = true;
 
     //transforming start button into stop button
@@ -77,6 +87,8 @@ function button_start()
     //updating information
     document.getElementById("p_start_status").innerHTML = "Simulation started";
 }
+
+// function button_stop() - stop simulation
 function button_stop()
 {
     started = false;
@@ -89,6 +101,8 @@ function button_stop()
     //updating information
     document.getElementById("p_start_status").innerHTML = "Simulation stopped";
 }
+
+// function button_speedDown() - speed down simulation
 function button_speedDown()
 {
     //decreasing frequency of calculating new generations
@@ -100,6 +114,8 @@ function button_speedDown()
     //updating information
 	document.getElementById("p_speed").innerHTML = "Speed = " + 1000/interval_timeout + " generations per sec"
 }
+
+// function button_speedUp() - speed up simulation
 function button_speedUp()
 {
     //increasing frequency of calculating new generations
@@ -112,6 +128,7 @@ function button_speedUp()
 	document.getElementById("p_speed").innerHTML = "Speed = " + 1000/interval_timeout + " generations per sec"
 }
 
+// function button_backTo1Gen() - go back to first generation
 function button_backTo1Gen()
 {
     button_stop();
@@ -126,12 +143,13 @@ function button_backTo1Gen()
 				living_cells[i].push(first_generation[i][j]);
 			}
         }
-        drawingGeneration();
+        drawGeneration();
         generation = 1;
         enableDisableUndoRedo(true);
     }
 }
 
+// function button_clear() - go back to first generation and clear board
 function button_clear()
 {
 	button_backTo1Gen();
@@ -139,6 +157,8 @@ function button_clear()
     init_simulation();
 }
 
+// function enableDisableUndoRedo(enable) - enables or disables "undo" and "redo" button
+// enable - boolean: if true - enables buttons, if false - vice versa
 function enableDisableUndoRedo(enable)
 {
     if(enable == true)

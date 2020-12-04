@@ -1,21 +1,28 @@
-cell_dimension = 10;
-cell_x_count = 80;
-cell_y_count = 80;
-const CELL_MARGIN = 1;
-var interval;
-var interval_timeout = 125;
-pushed = false;				// if any mouse button is pressed
-last_mouse_cell_position = null;
-started = false;			// if simulation is started
-generation = 1;
-living_cells = [];			//arrays of objects {x,y} (cell)
-first_generation = [];		//arrays of objects {x,y} (cell)
-new_generation = [];		//arrays of objects {x,y} (cell)
-buffor_cells = [];			//array of 10 sets of (arrays of objects {x,y} (cell)) for "redo", "undo" operations
-buffor_cells_pointer = 0;
-const MAX_BUFFOR_CELLS_LENGTH = 30;
+//board dimensions
+cell_dimension = 10;				//cell width
+cell_x_count = 80;					//width of board
+cell_y_count = 80;					//height of board
+const CELL_MARGIN = 1;				//thickness of gridcell lines
 
-// window.onload=function() - executes when loading site
+//interval variables
+var interval;						//id of created interval
+interval_timeout = 125;				//interval timeout (1/interval_timeout = frequency of calculating generations)
+
+//arrays 2D of cells {x,y}
+living_cells = [];					//current displayed generation
+first_generation = [];				//first generation
+new_generation = [];				//used for calculate new generation
+buffor_cells = [];					//array of 2D of cells {x,y} for "redo", "undo" operations
+buffor_cells_pointer = 0;			//pointer of "undo", "redo" operations. Pointers points place in buffor_cells array which is now displayed.
+const MAX_BUFFOR_CELLS_LENGTH = 30;	//max length of buffor_cells (maximum number of "undo" operations)
+
+//miscellaneous
+pushed = false;						//is any mouse button is pressed?
+last_mouse_cell_position = null;	//last cell position pointed with cursor
+started = false;					//is simulation is started?
+generation = 1;						//generation iterator
+
+//window.onload=function() - executes when loading site
 window.onload=function()
 {
 	if(cell_x_count != this.parseInt(cell_x_count) || cell_y_count != this.parseInt(cell_y_count))

@@ -2,7 +2,7 @@
 // **************** DRAWING TOOLS *********************
 // ****************************************************
 
-// function whichCell(x,y) - checks if cursor is on canvas and if is(not) on gridcell
+// function whichCell(x,y,canBeOnGridcell) - checks if cursor is on canvas and if is(not) on gridcell
 // x,y - location of cursor
 // canBeOnGridcell - boolen value - if cursor can be on gridcell
 function whichCell(x,y,canBeOnGridcell)
@@ -17,7 +17,8 @@ function whichCell(x,y,canBeOnGridcell)
 	return {x:cell_x, y:cell_y};
 }
 
-// function pencilErase(x,y) - when user clicks mouse or moves mouse whet it is pressed (on canvas)
+// function pencilErase(evt) - when user clicks mouse or moves mouse whet it is pressed (on canvas)
+// evt - event (used to get position of cursor)
 function pencilErase(evt)
 {
 	// Getting position of curson on canvas

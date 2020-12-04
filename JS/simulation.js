@@ -2,7 +2,8 @@
 // ******************** SIMULATION ********************
 // ****************************************************
 
-function drawingGeneration()
+// function drawGeneration() - draws generation
+function drawGeneration()
 {
 	//filling canvas with gridcell
 	ctx.fillStyle="black";
@@ -21,10 +22,14 @@ function drawingGeneration()
 				drawCell({x:i,y:j},"white");
 }
 
+// function simulation() - starts simulation Game of Life
 function simulation()
 {
+	//checks if simulation is started
 	if(started == false)
 		return;
+
+	//copying first generation to buffor
 	if(generation == 1)
 	{
 		enableDisableUndoRedo(false);
@@ -38,18 +43,20 @@ function simulation()
 			}
 		}
 	}
+
+	//calculating new generation
 	living_neighborhood = 0;
 	for(x = 0; x < cell_x_count; x++)
 	{
 		for(y = 0; y < cell_y_count; y++)
 		{
+			//calculating living neightbors for current cell {x,y}
 			living_neighborhood = 0;
-			for(i = x - 1; i <= x + 1; i++)     //calculating living neightbors
+			for(i = x - 1; i <= x + 1; i++)
 			{
-				//if(i >= 0 && i < cell_x_count)
 					for(j = y - 1; j <= y + 1; j++)
 					{
-						if(/*j >= 0 && j < cell_y_count && */!(i == x && j == y))
+						if(!(i == x && j == y))
 						{
 							if(i >= 0 && i < cell_x_count && j >= 0 && j < cell_y_count )
 							{
@@ -80,7 +87,6 @@ function simulation()
 				new_generation[x][y]=false;
 		}
 	}
-
 	for(i = 0; i < cell_x_count; i++)
 	{
 		for(j = 0; j < cell_y_count; j++)
@@ -88,7 +94,8 @@ function simulation()
 			living_cells[i][j] = new_generation[i][j];
 		}
 	}
-
 	generation++;
-	drawingGeneration();
+
+	//drawing new generation
+	drawGeneration();
 }
