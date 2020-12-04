@@ -10,7 +10,7 @@ function drawingGeneration()
 	{
 		for(j = 0; j < cell_y_count; j++)
 		{
-			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-cell_margin,cell_dimension-cell_margin);
+			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-CELL_MARGIN,cell_dimension-CELL_MARGIN);
 		}
 	}
 
@@ -27,7 +27,7 @@ function simulation()
 		return;
 	if(generation == 1)
 	{
-		enableDisable(false);
+		enableDisableUndoRedo(false);
         first_generation = [];
 		for(i = 0; i < living_cells.length; i++)
 		{

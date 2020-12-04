@@ -2,6 +2,35 @@
 // ****************** INPUT INTERFACE *****************
 // ****************************************************
 
+function dimensionsFormChanged()
+{
+    document.getElementById("a_w").innerHTML = parseInt(document.getElementById("inputText_x_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
+    document.getElementById("a_h").innerHTML = parseInt(document.getElementById("inputText_y_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
+}
+function button_submit()
+{
+    cx = parseInt(document.getElementById("inputText_x_cells").value);
+    cy = parseInt(document.getElementById("inputText_y_cells").value);
+    cd = parseInt(document.getElementById("inputText_cell_dim").value);
+    if(!(cx >= 5 && cx <= 250))
+        alert("Error: width of board must be between 5 and 250");
+    else if(!(cy >= 5 && cy <= 250))
+        alert("Error: height of board must be between 5 and 250");
+    else if(!(cd >= 3 && cd <= 25))
+        alert("Error: cell width must be between 3 and 25");
+    else
+    {
+        cell_x_count = cx;
+        cell_y_count = cy;
+        cell_dimension = cd;
+        button_clear();
+        if(cx*cy >= 20000)
+            alert("Warning: you created " + (cx*cy) + " cells - it might be diffucult for your computer to calculate it !!!!!");
+        document.getElementById("p_cx").innerHTML = cx;
+        document.getElementById("p_cy").innerHTML = cy;
+        document.getElementById("p_cd").innerHTML = cd;
+    }
+}
 function button_undo()
 {
     if(buffor_cells_pointer > 0)
@@ -42,7 +71,7 @@ function button_start()
 
     //transforming start button into stop button
     document.getElementById("image_start_stop").src = "img/icon_stop.png";
-    document.getElementById("image_start_stop").title = "stop";
+    document.getElementById("image_start_stop").title = "stop [S]";
     document.getElementById("button_start_stop").href = "javascript:button_stop();"
 
     //updating information
@@ -54,7 +83,7 @@ function button_stop()
 
     //transforming stop button into start button
     document.getElementById("image_start_stop").src = "img/icon_start.png";
-    document.getElementById("image_start_stop").title = "start";
+    document.getElementById("image_start_stop").title = "start [S]";
     document.getElementById("button_start_stop").href = "javascript:button_start();"
 
     //updating information
@@ -99,7 +128,7 @@ function button_backTo1Gen()
         }
         drawingGeneration();
         generation = 1;
-        enableDisable(true);
+        enableDisableUndoRedo(true);
     }
 }
 
@@ -110,7 +139,7 @@ function button_clear()
     init_simulation();
 }
 
-function enableDisable(enable)
+function enableDisableUndoRedo(enable)
 {
     if(enable == true)
     {

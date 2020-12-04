@@ -7,12 +7,12 @@
 // canBeOnGridcell - boolen value - if cursor can be on gridcell
 function whichCell(x,y,canBeOnGridcell)
 {
-	if( ((x % cell_dimension >= cell_dimension - cell_margin || y % cell_dimension >= cell_dimension - cell_margin) && !canBeOnGridcell) ||
-		x < 0 || x >= canvas_width || y < 0 || y >= canvas_height)    // if cursor is(not) on gridcell or outside of canvas
+	if( ((x % cell_dimension >= cell_dimension - CELL_MARGIN || y % cell_dimension >= cell_dimension - CELL_MARGIN) && !canBeOnGridcell) ||
+		x < 0 || x >= canv.width || y < 0 || y >= canv.height)    // if cursor is(not) on gridcell or outside of canvas
 		return null;
 	cell_x = Math.floor(x / cell_dimension);
 	cell_y = Math.floor(y / cell_dimension);
-	if(!(x >= 0 && x < canvas_width && y >= 0 && y < canvas_height))    // if cursor is outside canvas
+	if(!(x >= 0 && x < canv.width && y >= 0 && y < canv.height))    // if cursor is outside canvas
 		return null;
 	return {x:cell_x, y:cell_y};
 }

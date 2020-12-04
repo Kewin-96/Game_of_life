@@ -55,8 +55,28 @@ function mouseUp(evt)
 	buffor_cells_pointer++;
 }
 
-//DEBUG func
 function keyDown(evt)
 {
-	console.log("buffor_cells.length = " + buffor_cells.length + ", buffor_cells_pointer = " + buffor_cells_pointer);	
+	if(evt.ctrlKey == true)
+	{
+		if(evt.key == 'z')
+			button_undo();
+		else if(evt.key == 'y')
+			button_redo();
+	}
+	else if(evt.key == 's')
+	{
+		if(document.getElementById("p_start_status").innerHTML == "Simulation started")
+			button_stop();
+		else if(document.getElementById("p_start_status").innerHTML == "Simulation stopped")
+			button_start();
+	}
+	else if(evt.key == 'q')
+		button_speedDown();
+	else if(evt.key == 'e')
+		button_speedUp();
+	else if(evt.key == 'r')
+		button_backTo1Gen();
+	else if(evt.key == 'c')
+		button_clear();
 }

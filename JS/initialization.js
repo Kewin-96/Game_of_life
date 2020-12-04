@@ -2,8 +2,8 @@ function init_canvas()
 {
     //setting canvas dimensions
 	canv=document.getElementById("canv");
-	canv.width = canvas_width;
-	canv.height = canvas_height;
+	canv.width = cell_x_count * cell_dimension;
+	canv.height = cell_y_count * cell_dimension;
 
 	//filling canvas with gridcell
 	ctx=canv.getContext("2d");
@@ -11,8 +11,8 @@ function init_canvas()
 	ctx.fillRect(0,0,canv.width,canv.height);
 	ctx.fillStyle="black";
 	for(i = 0; i < cell_x_count; i++)
-		for(j = 0; j < cell_x_count; j++)
-			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-cell_margin,cell_dimension-cell_margin);
+		for(j = 0; j < cell_y_count; j++)
+			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-CELL_MARGIN,cell_dimension-CELL_MARGIN);
 }
 
 function init_simulation()
@@ -35,5 +35,4 @@ function init_simulation()
 			buffor_cells[0][i].push(false);
 		}
 	}
-
 }

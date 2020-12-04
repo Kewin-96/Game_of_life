@@ -131,5 +131,5 @@ function killAndDrawCells(cells)
 function drawCell(cell,color)
 	{
 	ctx.fillStyle=color;
-	ctx.fillRect(cell.x*cell_dimension, cell.y*cell_dimension, cell_dimension-cell_margin, cell_dimension-cell_margin);
+	ctx.fillRect(cell.x*cell_dimension, cell.y*cell_dimension, cell_dimension-CELL_MARGIN, cell_dimension-CELL_MARGIN);
 }
