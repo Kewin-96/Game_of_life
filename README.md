@@ -16,3 +16,6 @@ More about Game of Life: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life <
 
 # Project presentation
 https://youtu.be/AO-FXKyQ9TQ
+
+# Site HTML structure
+![Site structure](https://github.com/Kewin-96/Game_of_life/blob/main/img/Site_structure.png)
