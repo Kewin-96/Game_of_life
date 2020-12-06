@@ -74,7 +74,7 @@ body
 	margin: 5px;
 	text-decoration: none;
 }
-#p_start_status, #p_speed
+#p_start_status, #p_speed, #p_generation
 {
 	margin: 2px;
 	color: rgb(27, 27, 66);

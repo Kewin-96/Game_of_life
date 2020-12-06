@@ -145,6 +145,10 @@ function button_backTo1Gen()
         }
         drawGeneration();
         generation = 1;
+        
+        //update displaying generation number
+        document.getElementById("p_generation").innerHTML = "Generation = " + generation;
+
         enableDisableUndoRedo(true);
     }
 }

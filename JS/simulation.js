@@ -96,6 +96,9 @@ function simulation()
 	}
 	generation++;
 
+	//update displaying generation number
+	document.getElementById("p_generation").innerHTML = "Generation = " + generation;
+
 	//drawing new generation
 	drawGeneration();
 }
