@@ -25,7 +25,7 @@ function button_submit()
     {
         cell_x_count = cx;
         cell_y_count = cy;
-        cell_dimension = cd;
+        cell_width = cd;
         button_clear();
         if(cx*cy >= 20000)
             alert("Warning: you created " + (cx*cy) + " cells - it might be diffucult for your computer to calculate it !!!!!");

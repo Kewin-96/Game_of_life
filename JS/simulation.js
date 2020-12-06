@@ -11,7 +11,7 @@ function drawGeneration()
 	{
 		for(j = 0; j < cell_y_count; j++)
 		{
-			ctx.fillRect(i*cell_dimension,j*cell_dimension,cell_dimension-CELL_MARGIN,cell_dimension-CELL_MARGIN);
+			ctx.fillRect(i*cell_width,j*cell_width,cell_width-CELL_MARGIN,cell_width-CELL_MARGIN);
 		}
 	}
 
