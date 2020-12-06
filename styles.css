@@ -69,12 +69,12 @@ body
 		{
 			
 		}*/
-#button_image, #button_start_stop, #button_undo, #button_redo
+.button_image
 {
 	margin: 5px;
 	text-decoration: none;
 }
-#p_start_status, #p_speed, #p_generation
+.p_simulation_informations
 {
 	margin: 2px;
 	color: rgb(27, 27, 66);

@@ -2,9 +2,10 @@
 // **************** DRAWING TOOLS *********************
 // ****************************************************
 
-// function whichCell(x,y,canBeOnGridcell) - checks if cursor is on canvas and if is(not) on gridcell
+// function whichCell(x,y,canBeOnGridcell) - checks if cursor is on canvas and if is(not) on gridcell and returns pointed cell
 // x,y - location of cursor
-// canBeOnGridcell - boolen value - if cursor can be on gridcell
+// canBeOnGridcell - if cursor can be on gridcell (boolean)
+// returns pointed cell
 function whichCell(x,y,canBeOnGridcell)
 {
 	if( ((x % cell_width >= cell_width - CELL_MARGIN || y % cell_width >= cell_width - CELL_MARGIN) && !canBeOnGridcell) ||
@@ -17,8 +18,8 @@ function whichCell(x,y,canBeOnGridcell)
 	return {x:cell_x, y:cell_y};
 }
 
-// function pencilErase(evt) - when user clicks mouse or moves mouse whet it is pressed (on canvas)
-// evt - event (used to get position of cursor)
+// function pencilErase(evt) - pencil and erase tool - drawing or erasing cells on canvas
+// evt - event (used to get position of cursor and pressed mouse button)
 function pencilErase(evt)
 {
 	// Getting position of curson on canvas
@@ -27,31 +28,31 @@ function pencilErase(evt)
 
 	// Getting cell position on canvas
 	if(last_mouse_cell_position != null) // if there is previous cell
-		cell = whichCell(x,y,true);
+		cell = whichCell(x,y,true);		// get pointed cell (even if cursor is on gridcell)
 	else
-		cell = whichCell(x,y,false);
+		cell = whichCell(x,y,false);	// get pointed cell (if cursor is on cell)
 
 	// Drawing cells
 	if(cell == null && last_mouse_cell_position == null)    // if there is no cell and there is no previous cell: do not draw
 	{
 		return;
 	}
-	else if(cell!=null)     // if there is cell
+	else if(cell!=null)		// if there is cell
 	{
-		if(last_mouse_cell_position != null)    //if there is previous cell
+		if(last_mouse_cell_position != null)	//if there is previous cell - draw line between cells
 		{
-			if(evt.buttons === 1)
+			if(evt.buttons === 1)		//left mouse button - draw
 			{
 				cells = makeCellsLine(last_mouse_cell_position,cell,"white");
 				createAndDrawCells(cells);
 			}
-			if(evt.buttons === 2)
+			if(evt.buttons === 2)		//left mouse button - erase
 			{
 				cells = makeCellsLine(last_mouse_cell_position,cell,"black");
 				killAndDrawCells(cells);
 			}
 		}
-		else
+		else	//if there is no previous cell - draw pointed cell
 		{
 			if(evt.buttons === 1)
 				createAndDrawCells([cell]);
@@ -59,5 +60,5 @@ function pencilErase(evt)
 				killAndDrawCells([cell]);
 		}
 	}
-	last_mouse_cell_position = cell;    //saving previous cell
+	last_mouse_cell_position = cell;    //save previous cell
 }

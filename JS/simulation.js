@@ -2,7 +2,7 @@
 // ******************** SIMULATION ********************
 // ****************************************************
 
-// function drawGeneration() - draws generation
+// function drawGeneration() - draws current generation
 function drawGeneration()
 {
 	//filling canvas with gridcell
@@ -22,14 +22,14 @@ function drawGeneration()
 				drawCell({x:i,y:j},"white");
 }
 
-// function simulation() - starts simulation Game of Life
+// function simulation() - simulation - executes with frequency defined by user (1/interval_timeout)
 function simulation()
 {
 	//checks if simulation is started
 	if(started == false)
 		return;
 
-	//copying first generation to buffor
+	//if it was first generation - copying it to buffor
 	if(generation == 1)
 	{
 		enableDisableUndoRedo(false);
@@ -81,12 +81,14 @@ function simulation()
 						}
 					}
 			}
+			// deciding whether a cell in the next generation will be alive or dead (using the rules of Game of Life)
 			if((living_cells[x][y] == false && living_neighborhood == 3 ) || ( living_cells[x][y] == true && (living_neighborhood == 2 || living_neighborhood == 3) ))
 				new_generation[x][y]=true;
 			else
 				new_generation[x][y]=false;
 		}
 	}
+	//copying new generation to current set of cell
 	for(i = 0; i < cell_x_count; i++)
 	{
 		for(j = 0; j < cell_y_count; j++)
@@ -94,6 +96,8 @@ function simulation()
 			living_cells[i][j] = new_generation[i][j];
 		}
 	}
+
+	//increasing iterator
 	generation++;
 
 	//update displaying generation number

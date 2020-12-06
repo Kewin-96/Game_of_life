@@ -2,26 +2,26 @@
 // ******************** INPUT EVENTS ******************
 // ****************************************************
 
-// function mouseMove(evt) - moving mouse (on canvas)
+// function mouseMove(evt) - executes when moving mouse (on canvas)
 // evt - event (used to get mouse button)
 function mouseMove(evt)
 {
-	if(pushed == true)
+	if(mouse_pushed == true)
 		pencilErase(evt);
 }
 
-// function mouseDown(evt) - pressing mouse button (on canvas)
+// function mouseDown(evt) - executes when pressing mouse button (on canvas)
 // evt - event (used to get mouse button)
 function mouseDown(evt)
 {
-	pushed = true;
+	mouse_pushed = true;
 	pencilErase(evt);
 }
 
-// function mouseDown() - leaving mouse button (on canvas)
+// function mouseDown() - executes when leaving mouse button (on canvas)
 function mouseUp()
 {
-	pushed = false;
+	mouse_pushed = false;
 	last_mouse_cell_position = null;
 	
 	//copying set of cells to buffor_cells for "undo", "redo" operations
@@ -54,7 +54,7 @@ function mouseUp()
 	buffor_cells_pointer++;
 }
 
-// function keyDown(evt) - pressing key
+// function keyDown(evt) - executes when pressing key
 // evt - event (used to get key)
 function keyDown(evt)
 {

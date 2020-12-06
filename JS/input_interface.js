@@ -5,16 +5,16 @@
 // function dimensionsFormChanged() - function executes when text will be change in one of 3 textbox on site
 function dimensionsFormChanged()
 {
-    document.getElementById("a_w").innerHTML = parseInt(document.getElementById("inputText_x_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
-    document.getElementById("a_h").innerHTML = parseInt(document.getElementById("inputText_y_cells").value * parseInt(document.getElementById("inputText_cell_dim").value));
+    document.getElementById("a_w").innerHTML = parseInt(document.getElementById("input_x_cells").value * parseInt(document.getElementById("input_cell_width").value));
+    document.getElementById("a_h").innerHTML = parseInt(document.getElementById("input_y_cells").value * parseInt(document.getElementById("input_cell_width").value));
 }
 
 // function button_submit() - function takes input parameters, checks if they are correct and applies them
 function button_submit()
 {
-    cx = parseInt(document.getElementById("inputText_x_cells").value);
-    cy = parseInt(document.getElementById("inputText_y_cells").value);
-    cd = parseInt(document.getElementById("inputText_cell_dim").value);
+    cx = parseInt(document.getElementById("input_x_cells").value);
+    cy = parseInt(document.getElementById("input_y_cells").value);
+    cd = parseInt(document.getElementById("input_cell_width").value);
     if(!(cx >= 5 && cx <= 250))
         alert("Error: width of board must be between 5 and 250");
     else if(!(cy >= 5 && cy <= 250))
@@ -29,13 +29,13 @@ function button_submit()
         button_clear();
         if(cx*cy >= 20000)
             alert("Warning: you created " + (cx*cy) + " cells - it might be diffucult for your computer to calculate it !!!!!");
-        document.getElementById("p_cx").innerHTML = cx;
-        document.getElementById("p_cy").innerHTML = cy;
-        document.getElementById("p_cd").innerHTML = cd;
+        document.getElementById("a_current_cells_x").innerHTML = cx;
+        document.getElementById("a_current_cells_y").innerHTML = cy;
+        document.getElementById("a_current_cells_width").innerHTML = cd;
     }
 }
 
-// function button_undo() - undo operation
+// function button_undo() - undo operation - loads previous set of drawed cells and decrements pointer
 function button_undo()
 {
     if(buffor_cells_pointer > 0)
@@ -54,7 +54,7 @@ function button_undo()
     }
 }
 
-// function button_redo() - redo operation
+// function button_redo() - redo operation - loads next set of drawed cells and increments pointer
 function button_redo()
 {
     if(buffor_cells_pointer < buffor_cells.length - 1)
@@ -73,10 +73,10 @@ function button_redo()
     }
 }
 
-// function button_start() - start simulation
+// function button_start() - starts simulation
 function button_start()
 {
-    //boolen - is simulation started
+    //is simulation started (boolean)
     started = true;
 
     //transforming start button into stop button
@@ -88,7 +88,7 @@ function button_start()
     document.getElementById("p_start_status").innerHTML = "Simulation started";
 }
 
-// function button_stop() - stop simulation
+// function button_stop() - stops simulation
 function button_stop()
 {
     started = false;
@@ -102,7 +102,7 @@ function button_stop()
     document.getElementById("p_start_status").innerHTML = "Simulation stopped";
 }
 
-// function button_speedDown() - speed down simulation
+// function button_speedDown() - speeds down simulation
 function button_speedDown()
 {
     //decreasing frequency of calculating new generations
@@ -115,7 +115,7 @@ function button_speedDown()
 	document.getElementById("p_speed").innerHTML = "Speed = " + 1000/interval_timeout + " generations per sec"
 }
 
-// function button_speedUp() - speed up simulation
+// function button_speedUp() - speeds up simulation
 function button_speedUp()
 {
     //increasing frequency of calculating new generations
@@ -128,7 +128,7 @@ function button_speedUp()
 	document.getElementById("p_speed").innerHTML = "Speed = " + 1000/interval_timeout + " generations per sec"
 }
 
-// function button_backTo1Gen() - go back to first generation
+// function button_backTo1Gen() - goes back to first generation
 function button_backTo1Gen()
 {
     button_stop();
@@ -148,7 +148,7 @@ function button_backTo1Gen()
         
         //update displaying generation number
         document.getElementById("p_generation").innerHTML = "Generation = " + generation;
-
+        
         enableDisableUndoRedo(true);
     }
 }

@@ -17,7 +17,7 @@ buffor_cells_pointer = 0;			//pointer of "undo", "redo" operations. Pointer indi
 const MAX_BUFFOR_CELLS_LENGTH = 30;	//max length of buffor_cells (maximum number of "undo" operations)
 
 //miscellaneous
-pushed = false;						//is any mouse button is pressed?
+mouse_pushed = false;				//is any mouse button is pressed?
 last_mouse_cell_position = null;	//last cell position pointed with cursor
 started = false;					//is simulation is started?
 generation = 1;						//generation iterator
@@ -37,9 +37,9 @@ window.onload=function()
 	canv.addEventListener("mousedown",mouseDown);
 	canv.addEventListener("mouseup",mouseUp);
 	document.addEventListener("keydown",keyDown);
-	document.getElementById("inputText_x_cells").addEventListener("change",dimensionsFormChanged);
-	document.getElementById("inputText_y_cells").addEventListener("change",dimensionsFormChanged);
-	document.getElementById("inputText_cell_dim").addEventListener("change",dimensionsFormChanged);
+	document.getElementById("input_x_cells").addEventListener("change",dimensionsFormChanged);
+	document.getElementById("input_y_cells").addEventListener("change",dimensionsFormChanged);
+	document.getElementById("input_cell_width").addEventListener("change",dimensionsFormChanged);
 	canv.oncontextmenu  = function(e)
 	{
 		var evt = new Object({keyCode:93});
