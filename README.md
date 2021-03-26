@@ -17,6 +17,8 @@ More about Game of Life: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life <
 # Project presentation
 https://youtu.be/AO-FXKyQ9TQ
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/AO-FXKyQ9TQ/0.jpg)](https://www.youtube.com/watch?v=AO-FXKyQ9TQ)
+
 # Code quality
 * 100% code documentation
 
